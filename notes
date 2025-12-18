@@ -18,3 +18,29 @@ throw 關鍵字： 當你偵測到某種不合理的情況時，可以手動「�
 SeriesCollection：
 用途：它是 Series 的清單，一個圖表可以包含多個 Series (例如：同時顯示長條圖與折線圖)。
 屬性：對應到 CartesianChart.Series 屬性。
+
+在 C# 中，反射 (Reflection) 是一項強大的技術，它允許程式在執行期間 (Runtime) 檢查、檢索並操作程式集（Assembly）中的中繼資料（Metadata）。
+簡單來說，反射讓你的程式具有「自我意識」，能夠在執行時去「看」自己定義了哪些類別、方法和屬性，甚至可以在不知道型別的情況下呼叫它們。以下是反射的四大核心功能：
+1. 檢索型別資訊 (Inspecting Metadata)
+這是反射最基礎的功能。你可以在執行時取得任何類別的詳細資訊。
+功能：獲取類別名稱、命名空間、父類別、實作的介面。
+獲取成員：列出類別中所有的屬性 (PropertyInfo)、方法 (MethodInfo)、欄位 (FieldInfo) 與事件。
+應用場景：自動生成文件工具、ORM 框架（如 Entity Framework）讀取資料庫對應。
+
+2. 動態實例化物件 (Dynamic Instantiation)
+即使在編寫程式碼時不知道類別名稱，只要在執行時拿到一個字串（類別名稱），反射就能幫你把物件建立出來。
+核心工具：Activator.CreateInstance()。
+應用場景：外掛系統 (Plugin System)。程式啟動後掃描特定的 DLL 檔案，並動態載入裡面的類別，而不需在編譯時引用它。
+
+3. 動態呼叫成員 (Late Binding / Invocation)
+反射允許你動態地讀取屬性值或執行方法。
+功能：呼叫方法：使用 MethodInfo.Invoke() 執行方法。
+存取屬性：使用 GetValue() 或 SetValue() 讀寫資料。
+強大之處：它可以存取 private (私有) 的成員。這在單元測試或特殊除錯工具中非常有用，雖然這會破壞封裝性。
+
+4. 檢查自定義特性 (Attribute Inspection)
+這是反射在現代開發（如 ASP.NET Core）中最常見的用法。
+功能：讀取標記在類別或方法上的 [Attribute]。
+例子：
+在 Web API 中，反射會檢查方法是否有 [HttpGet] 或 [Route]。
+在資料驗證中，檢查屬性是否有 [Required] 或 [StringLength]。
